@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimplePrivacy Analytics - Privacy-First, Simple Website Analytics</title>
+    <meta name="description" content="A simple, privacy-focused alternative to Google Analytics. Get the essential metrics without the complexity.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+        
+        /* Problem Section */
+        .problem {
+            background-color: white;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .problem-card {
+            background: #f1f5f9;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid #ef4444;
+        }
+        
+        .problem-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #dc2626;
+        }
+        
+        /* Solution Section */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .solution-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border-top: 4px solid #3b82f6;
+        }
+        
+        .solution-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1d4ed8;
+        }
+        
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Features */
+        .features {
+            background-color: #f1f5f9;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            position: relative;
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid #3b82f6;
+            transform: scale(1.05);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #3b82f6;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #1e293b;
+            margin: 1rem 0;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: #64748b;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        
+        .pricing-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        /* Early Access Form */
+        .early-access {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-subtitle {
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .form-button {
+            width: 100%;
+            padding: 1rem;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .form-button:hover {
+            background: #0da271;
+        }
+        
+        .note {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1e293b;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .pricing-card.popular {
+                transform: none;
+            }
+            
+            .form-container {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">SimplePrivacy Analytics</div>
+            <div class="tagline">Privacy-first website analytics without the complexity</div>
+            <a href="#early-access" class="cta-button">Join Early Access</a>
+        </div>
+    </header>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <h2 class="section-title">The Problem with Google Analytics</h2>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>Too Complex</h3>
+                    <p>Google Analytics 4 is overwhelming for small businesses and bloggers. You need a degree in analytics just to understand basic metrics.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Privacy Nightmare</h3>
+                    <p>GDPR, CCPA, and other privacy regulations make compliance a headache. Cookie consent banners ruin user experience.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Blocked by Ad Blockers</h3>
+                    <p>Up to 40% of users block Google Analytics, leaving you with incomplete data and skewed insights.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>You Don't Need 90% of Features</h3>
+                    <p>Small businesses only care about page views, traffic sources, and popular pages. Why pay for complexity you never use?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Our Simple Solution</h2>
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <div class="icon">📊</div>
+                    <h3>Essential Metrics Only</h3>
+                    <p>Get just the metrics that matter: page views, unique visitors, traffic sources, and popular pages.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="icon">🛡️</div>
+                    <h3>Privacy by Design</h3>
+                    <p>No cookies required. GDPR compliant out of the box. No personal data collection.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="icon">⚡</div>
+                    <h3>Lightweight & Fast</h3>
+                    <p>Tracking script is under 2KB. Won't slow down your website or affect SEO.</p>
+                </div>
+                <div class="solution-card">
+                    <div class="icon">💵</div>
+                    <h3>Simple Pricing</h3>
+                    <p>Straightforward monthly plans. No hidden fees, no complex enterprise contracts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Everything You Need, Nothing You Don't</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Lightweight Tracker</h3>
+                    <p>One line of JavaScript. No external dependencies.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Cookie-Free Tracking</h3>
+                    <p>Fully GDPR compliant. No cookie banners needed.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Simple Dashboard</h3>
+                    <p>Clean, intuitive interface. No training required.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Real-Time Data</h3>
+                    <p>See current visitors on your site right now.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Multiple Websites</h3>
+                    <p>Track all your sites from one account.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Data Export</h3>
+                    <p>Download your data as CSV anytime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">$0<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>1 website</li>
+                        <li>30-day data retention</li>
+                        <li>Basic metrics</li>
+                        <li>Community support</li>
+                    </ul>
+                    <a href="#early-access" class="cta-button">Get Started</a>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-badge">MOST POPULAR</div>
+                    <h3>Personal</h3>
+                    <div class="price">$9<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>5 websites</li>
+                        <li>1-year data retention</li>
+                        <li>All basic features</li>
+                        <li>Email support</li>
+                        <li>Real-time data</li>
+                    </ul>
+                    <a href="#early-access" class="cta-button">Join Early Access</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Professional</h3>
+                    <div class="price">$19<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>20 websites</li>
+                        <li>Unlimited data retention</li>
+                        <li>Advanced features</li>
+                        <li>Priority support</li>
+                        <li>Data export</li>
+                    </ul>
+                    <a href="#early-access" class="cta-button">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Early Access Form -->
+    <section class="early-access" id="early-access">
+        <div class="container">
+            <h2 class="section-title">Join Early Access</h2>
+            <div class="form-container">
+                <h3 class="form-title">Be Among the First</h3>
+                <p class="form-subtitle">Get early access to SimplePrivacy Analytics with special founding member pricing.</p>
+                
+                <form id="early-access-form">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" placeholder="Your Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Website URL (optional)">
+                    </div>
+                    <button type="submit" class="form-button">Join Early Access List</button>
+                </form>
+                
+                <p class="note">We respect your privacy. No spam, unsubscribe anytime. Early access users get 50% off for the first 6 months.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2026 SimplePrivacy Analytics. All rights reserved.</p>
+            <p>Made with ❤️ for small businesses and privacy-conscious website owners.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple form handling for demo purposes
+        document.getElementById('early-access-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const name = formData.get('name') || 'User';
+            
+            // In a real implementation, this would send data to a backend
+            // For now, just show an alert
+            alert(`Thank you, ${name}! You've been added to our early access list. We'll contact you soon with next steps.`);
+            
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
